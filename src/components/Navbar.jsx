@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Briefcase, FileText, Code, Github, Linkedin, Twitter, Zap } from 'lucide-react';
+import { Home, User, FileText, Code, Github, Linkedin, Zap } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {

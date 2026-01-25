@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Code, Layers, Smartphone, Globe } from 'lucide-react';
+import { Github, ExternalLink, Layers, Smartphone, Globe } from 'lucide-react';
 
 const Projects = () => {
     const [filter, setFilter] = useState('All');
@@ -9,29 +9,38 @@ const Projects = () => {
     const projects = [
         {
             id: 1,
-            title: "E-Commerce Platform",
+            title: "SneakerHead",
             category: "Web App",
-            description: "A fully functional online store with cart management, user authentication, and payment gateway integration.",
-            tags: ["React", "Redux", "Node.js", "MongoDB"],
+            description: "A modern Sneakerhead web application built with React.js, Three.js, and Framer Motion, featuring immersive 3D sneaker visualizations, smooth animations, and an interactive user experience designed for sneaker enthusiasts.",
+            tags: ["React", "FramerMotion", "Threejs", "Tailwind"],
             image: "from-blue-500/20 to-cyan-500/20",
+            imageSrc: "https://sneakerhead-khaki.vercel.app/sneaker_1.png",
+            githubUrl: "https://github.com/Rexbiswas/sneakerhead",
+            projectUrl: "https://sneakerhead-khaki.vercel.app/",
             icon: Globe
         },
         {
             id: 2,
-            title: "Task Management App",
-            category: "Productivity",
-            description: "Smart task manager with drag-and-drop kanban boards and real-time collaboration features.",
-            tags: ["React", "Firebase", "Tailwind"],
+            title: "VisualConcept",
+            category: "Web Design",
+            description: "This visual concept showcases a futuristic concept car presented through an immersive, interactive web experience. Built using React for a component-driven architecture, Tailwind CSS for a clean and modern UI, and Framer Motion for smooth, cinematic animations, the project focuses on blending technology with design storytelling.",
+            tags: ["React", "Tailwind", "FramerMotion", "GSAP", "Threejs"],
             image: "from-purple-500/20 to-pink-500/20",
+            imageSrc: "https://visual-concept.vercel.app/visual_concept.avif",
+            githubUrl: "https://github.com/Rexbiswas/visual_concept",
+            projectUrl: "https://visual-concept.vercel.app/",
             icon: Layers
         },
         {
             id: 3,
-            title: "Social Media Dashboard",
-            category: "Web Design",
-            description: "Analytics dashboard aggregating data from multiple social platforms with interactive charts.",
-            tags: ["Next.js", "Chart.js", "API Integration"],
+            title: "Rockerz",
+            category: "Web App",
+            description: "A modern and responsive web application built with React that showcases the Rockerz headphone lineup with an intuitive and visually appealing user interface.",
+            tags: ["React", "tailwind", "FramerMotion"],
             image: "from-orange-500/20 to-red-500/20",
+            imageSrc: "#",
+            githubUrl: "https://github.com/Rexbiswas/rockerz",
+            projectUrl: "https://rockerz-kappa.vercel.app/",
             icon: Smartphone
         }
     ];
@@ -66,7 +75,6 @@ const Projects = () => {
                     </p>
                 </div>
 
-                {/* Filters */}
                 {/* Filters */}
                 <div className="w-full flex md:justify-center overflow-x-auto md:overflow-visible py-6 md:py-0 mb-10 md:mb-16 px-6 md:px-0 scrollbar-hide">
                     <div className="flex flex-nowrap md:flex-wrap gap-3 md:gap-4 mx-auto md:mx-0 min-w-min">
@@ -103,20 +111,29 @@ const Projects = () => {
                                 className="group relative bg-[#212121] rounded-3xl p-6 shadow-[20px_20px_60px_#1c1c1c,-20px_-20px_60px_#262626] hover:shadow-[25px_25px_70px_#1a1a1a,-25px_-25px_70px_#282828] transition-all duration-300 border border-gray-800/10"
                             >
                                 {/* Image / Preview Area (Inset Shadow) */}
-                                <div className={`h-64 rounded-2xl bg-linear-to-br ${project.image} shadow-[inset_5px_5px_10px_rgba(0,0,0,0.5),inset_-5px_-5px_10px_rgba(255,255,255,0.05)] mb-6 flex items-center justify-center relative overflow-hidden`}>
-                                    <project.icon size={64} className="text-white/20 group-hover:text-white/40 transition-colors duration-500 transform group-hover:scale-110" />
+                                <div className={`h-64 rounded-2xl bg-linear-to-br ${project.imageSrc ? '' : project.image} shadow-[inset_5px_5px_10px_rgba(0,0,0,0.5),inset_-5px_-5px_10px_rgba(255,255,255,0.05)] mb-6 flex items-center justify-center relative overflow-hidden`}>
+
+                                    {project.imageSrc ? (
+                                        <img src={project.imageSrc} alt={project.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                                    ) : (
+                                        <project.icon size={64} className="text-white/20 group-hover:text-white/40 transition-colors duration-500 transform group-hover:scale-110" />
+                                    )}
 
                                     {/* Overlay on Hover */}
                                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6">
                                         <a
-                                            href="#"
+                                            href={project.githubUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="p-3 rounded-full bg-[#212121] text-[#00ebff] shadow-[5px_5px_10px_black] hover:scale-110 transition-transform"
                                             title="View Code"
                                         >
                                             <Github size={24} />
                                         </a>
                                         <a
-                                            href="#"
+                                            href={project.projectUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="p-3 rounded-full bg-[#212121] text-[#00ebff] shadow-[5px_5px_10px_black] hover:scale-110 transition-transform"
                                             title="Live Demo"
                                         >

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowRight, Mail, Terminal, Code, Cpu, Globe, Zap, Database, Hash } from 'lucide-react';
+import { motion, useMotionValue } from 'framer-motion';
+import { ArrowRight, Mail, Terminal, Code, Cpu, Database, Hash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -152,7 +152,7 @@ const Home = () => {
                 </motion.div>
 
                 {/* Background Grid Pattern for Technical/Coding Vibe */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] -z-20 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] -z-20 pointer-events-none"></div>
 
                 {/* Floating Neumorphic Code Keys/Icons */}
                 <motion.div

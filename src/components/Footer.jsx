@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Twitter, Mail, Heart, ArrowUp } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
@@ -35,7 +35,7 @@ const Footer = () => {
                     </div>
 
                     <motion.button
-                        onClick={() => navigate('/contact')}
+                        onClick={() => alert("hello world!, I am Rishi Biswas")}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="px-8 py-4 rounded-full bg-[#212121] text-[#00ebff] font-bold tracking-wider shadow-[8px_8px_16px_#151515,-8px_-8px_16px_#2d2d2d] hover:shadow-[inset_8px_8px_16px_#151515,inset_-8px_-8px_16px_#2d2d2d] transition-all duration-300 border border-gray-800/10"
@@ -101,7 +101,7 @@ const Footer = () => {
                         &copy; {currentYear} Rishi Biswas. All rights reserved.
                     </p>
 
-                    
+
 
                     {/* Back to Top Button */}
                     <motion.button

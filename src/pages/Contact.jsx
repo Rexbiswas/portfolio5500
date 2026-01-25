@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Github, Linkedin, MapPin, Copy, Check, ExternalLink, Terminal, Cpu } from 'lucide-react';
+import { Mail, Github, Linkedin, MapPin, Copy, Check, ExternalLink, Cpu } from 'lucide-react';
 
 const Contact = () => {
     const [copied, setCopied] = useState(false);
@@ -61,7 +61,7 @@ const Contact = () => {
             <Navbar />
 
             {/* Background Grid Pattern (Consistent with Home) */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-4 pt-32 pb-20 relative z-10 min-h-screen flex flex-col items-center justify-center">
 
@@ -131,13 +131,13 @@ const Contact = () => {
 
                                 <div className="relative z-10">
                                     <h3 className="text-gray-500 text-sm font-mono tracking-wider mb-2 uppercase">{method.title}</h3>
-                                    <p className={`text-xl md:text-2xl font-bold text-gray-200 group-hover:text-[#00ebff] transition-colors break-words ${method.id === 'email' && copied ? 'text-[#00ebff]' : ''}`}>
+                                    <p className={`text-xl md:text-2xl font-bold text-gray-200 group-hover:text-[#00ebff] transition-colors break-all ${method.id === 'email' && copied ? 'text-[#00ebff]' : ''}`}>
                                         {method.id === 'email' && copied ? 'Copied to Clipboard!' : method.value}
                                     </p>
                                 </div>
 
                                 {/* Glow Effect on Hover */}
-                                <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#00ebff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                                <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#00ebff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-1000 pointer-events-none transform -skew-x-12 -translate-x-full group-hover:translate-x-full" />
                             </div>
                         </motion.div>
                     ))}
