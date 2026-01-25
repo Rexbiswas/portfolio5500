@@ -67,20 +67,23 @@ const Projects = () => {
                 </div>
 
                 {/* Filters */}
-                <div className="flex flex-wrap justify-center gap-4 mb-16">
-                    {filters.map((f) => (
-                        <button
-                            key={f}
-                            onClick={() => setFilter(f)}
-                            className={`px-6 py-2 rounded-full font-medium transition-all duration-300 border border-gray-800/20
-                                ${filter === f
-                                    ? 'bg-[#212121] text-[#00ebff] shadow-[inset_5px_5px_10px_#151515,inset_-5px_-5px_10px_#2d2d2d]'
-                                    : 'bg-[#212121] text-gray-500 shadow-[5px_5px_10px_#151515,-5px_-5px_10px_#2d2d2d] hover:text-gray-300 hover:shadow-[7px_7px_14px_#151515,-7px_-7px_14px_#2d2d2d]'
-                                }`}
-                        >
-                            {f}
-                        </button>
-                    ))}
+                {/* Filters */}
+                <div className="w-full flex md:justify-center overflow-x-auto md:overflow-visible pb-4 md:pb-0 mb-10 md:mb-16 px-4 md:px-0 scrollbar-hide">
+                    <div className="flex flex-nowrap md:flex-wrap gap-3 md:gap-4 mx-auto md:mx-0 min-w-min">
+                        {filters.map((f) => (
+                            <button
+                                key={f}
+                                onClick={() => setFilter(f)}
+                                className={`px-5 py-2 md:px-6 md:py-2 text-sm md:text-base rounded-full font-medium transition-all duration-300 border border-gray-800/20 whitespace-nowrap shrink-0
+                                    ${filter === f
+                                        ? 'bg-[#212121] text-[#00ebff] shadow-[inset_5px_5px_10px_#151515,inset_-5px_-5px_10px_#2d2d2d]'
+                                        : 'bg-[#212121] text-gray-500 shadow-[5px_5px_10px_#151515,-5px_-5px_10px_#2d2d2d] hover:text-gray-300 hover:shadow-[7px_7px_14px_#151515,-7px_-7px_14px_#2d2d2d]'
+                                    }`}
+                            >
+                                {f}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Projects Grid */}
