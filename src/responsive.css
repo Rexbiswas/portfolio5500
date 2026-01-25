@@ -1,0 +1,62 @@
+/* Global Mobile Styles (Max Width 768px for Tablet/Mobile) */
+@media only screen and (max-width: 768px) {
+
+    /* Navbar Positioning & Styling */
+    .navbar-container {
+        width: 95% !important;
+        padding: 0.5rem 0.5rem !important;
+        bottom: 1.5rem !important;
+        top: auto !important;
+        /* Move to bottom */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        right: auto !important;
+        z-index: 1000 !important;
+    }
+
+    /* Adjust page padding to prevent content overlap with bottom navbar */
+    .min-h-screen {
+        padding-top: 2rem !important;
+        /* Reduce top padding since nav is moved */
+        padding-bottom: 8rem !important;
+        /* Increase bottom padding for nav clearance */
+    }
+
+    /* Typography Scaling for smaller screens */
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+
+    h2 {
+        font-size: 1.8rem !important;
+    }
+
+    /* Ensure specific containers don't overflow */
+    .max-w-6xl,
+    .max-w-7xl,
+    .max-w-4xl {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Hide Tooltips labels on mobile to avoid clutter */
+    .nav-Tooltip {
+        display: none !important;
+    }
+}
+
+/* Extra Small Devices (Portrait Phones < 380px) */
+@media only screen and (max-width: 380px) {
+    .navbar-container {
+        width: 98% !important;
+        bottom: 1rem !important;
+    }
+
+    /* Further scale down nav interaction elements if needed */
+    .navbar-container nav {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        gap: 0 !important;
+    }
+}

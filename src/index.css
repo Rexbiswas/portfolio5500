@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #212121;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --accent-color: #00ebff;
+
+  /* Hardcoded shadow values for easy usage in tailwind arbitrary values */
+  --shadow-color-dark: #1c1c1c;
+  --shadow-color-light: #262626;
+
+  --shadow-small-dark: #151515;
+  --shadow-small-light: #2d2d2d;
+}
+
+[data-theme="light"] {
+  --bg-primary: #e0e5ec;
+  --text-primary: #374151;
+  --text-secondary: #6b7280;
+  --accent-color: #00bdcc;
+
+  --shadow-color-dark: #bebebe;
+  --shadow-color-light: #ffffff;
+
+  --shadow-small-dark: #bebebe;
+  --shadow-small-light: #ffffff;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hide Scrollbar Global */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
