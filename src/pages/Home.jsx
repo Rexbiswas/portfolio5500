@@ -161,9 +161,9 @@ const Home = () => {
                         rotate: [0, 5, 0]
                     }}
                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-[20%] right-[10%] w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-[#212121] shadow-[8px_8px_16px_#151515,-8px_-8px_16px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 hidden md:flex"
+                    className="absolute top-[12%] right-[5%] md:top-[20%] md:right-[10%] w-12 h-12 md:w-20 md:h-20 rounded-2xl bg-[#212121] shadow-[8px_8px_16px_#151515,-8px_-8px_16px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 flex"
                 >
-                    <Code size={32} />
+                    <Code className="w-6 h-6 md:w-9 md:h-9" />
                 </motion.div>
 
                 <motion.div
@@ -172,9 +172,9 @@ const Home = () => {
                         rotate: [0, -5, 0]
                     }}
                     transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-[20%] left-[8%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-[#212121] shadow-[8px_8px_16px_#151515,-8px_-8px_16px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 hidden md:flex"
+                    className="absolute bottom-[15%] left-[5%] md:bottom-[20%] md:left-[8%] w-14 h-14 md:w-24 md:h-24 rounded-2xl bg-[#212121] shadow-[8px_8px_16px_#151515,-8px_-8px_16px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 flex"
                 >
-                    <Database size={36} />
+                    <Database className="w-7 h-7 md:w-10 md:h-10" />
                 </motion.div>
 
                 <motion.div
@@ -183,9 +183,9 @@ const Home = () => {
                         rotate: [0, 10, 0]
                     }}
                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                    className="absolute top-[25%] left-[12%] w-12 h-12 md:w-16 md:h-16 rounded-xl bg-[#212121] shadow-[6px_6px_12px_#151515,-6px_-6px_12px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 hidden md:flex"
+                    className="absolute top-[15%] left-[5%] md:top-[25%] md:left-[12%] w-10 h-10 md:w-16 md:h-16 rounded-xl bg-[#212121] shadow-[6px_6px_12px_#151515,-6px_-6px_12px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 flex"
                 >
-                    <Hash size={24} />
+                    <Hash className="w-5 h-5 md:w-7 md:h-7" />
                 </motion.div>
 
                 <motion.div
@@ -194,9 +194,9 @@ const Home = () => {
                         rotate: [0, -8, 0]
                     }}
                     transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                    className="absolute bottom-[30%] right-[15%] w-14 h-14 md:w-18 md:h-18 rounded-xl bg-[#212121] shadow-[6px_6px_12px_#151515,-6px_-6px_12px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 hidden md:flex"
+                    className="absolute bottom-[18%] right-[5%] md:bottom-[30%] md:right-[15%] w-10 h-10 md:w-18 md:h-18 rounded-xl bg-[#212121] shadow-[6px_6px_12px_#151515,-6px_-6px_12px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 flex"
                 >
-                    <Cpu size={28} />
+                    <Cpu className="w-5 h-5 md:w-8 md:h-8" />
                 </motion.div>
 
             </div>
