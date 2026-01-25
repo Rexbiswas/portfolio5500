@@ -68,7 +68,7 @@ const Projects = () => {
 
                 {/* Filters */}
                 {/* Filters */}
-                <div className="w-full flex md:justify-center overflow-x-auto md:overflow-visible pb-4 md:pb-0 mb-10 md:mb-16 px-4 md:px-0 scrollbar-hide">
+                <div className="w-full flex md:justify-center overflow-x-auto md:overflow-visible py-6 md:py-0 mb-10 md:mb-16 px-6 md:px-0 scrollbar-hide">
                     <div className="flex flex-nowrap md:flex-wrap gap-3 md:gap-4 mx-auto md:mx-0 min-w-min">
                         {filters.map((f) => (
                             <button
