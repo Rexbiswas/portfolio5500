@@ -12,10 +12,9 @@ const Footer = () => {
     };
 
     const socialLinks = [
-        { icon: Github, url: 'https://github.com' },
-        { icon: Linkedin, url: 'https://linkedin.com' },
-        { icon: Twitter, url: 'https://twitter.com' },
-        { icon: Mail, url: 'mailto:contact@rishibiswas.com' }, // Placeholder email
+        { icon: Github, url: 'https://github.com/Rexbiswas' },
+        { icon: Linkedin, url: 'https://www.linkedin.com/in/rishi-biswas-0474a6258/' },
+        { icon: Mail, url: 'mailto:contact@rexbiswas1@gmail.com' }, // Placeholder email
     ];
 
     return (

@@ -28,9 +28,9 @@ const Contact = () => {
         {
             id: "github",
             title: "Code Repository",
-            value: "github.com/RishiBiswas",
+            value: "github.com/Rexbiswas",
             icon: Github,
-            link: "https://github.com/RishiBiswas",
+            link: "https://github.com/Rexbiswas",
             secondaryIcon: ExternalLink,
             color: "text-purple-400",
             delay: 0.3
@@ -40,7 +40,7 @@ const Contact = () => {
             title: "Professional Network",
             value: "linkedin.com/in/rishi-biswas",
             icon: Linkedin,
-            link: "https://linkedin.com/in/rishi-biswas",
+            link: "https://www.linkedin.com/in/rishi-biswas-0474a6258/",
             secondaryIcon: ExternalLink,
             color: "text-blue-400",
             delay: 0.4
