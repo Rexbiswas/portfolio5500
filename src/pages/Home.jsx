@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import { motion, useMotionValue } from 'framer-motion';
-import { ArrowRight, Mail } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { ArrowRight, Mail, Terminal, Code, Cpu, Globe, Zap, Database, Hash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -90,20 +90,42 @@ const Home = () => {
                 </motion.div>
 
                 {/* Typing Effect Container */}
-                <div className="h-16 md:h-24 flex items-center justify-center mb-8">
-                    <motion.p
-                        className="text-lg md:text-3xl lg:text-4xl font-light text-gray-400"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 }}
-                    >
-                        I am a{' '}
-                        <span className="text-[#00ebff] font-semibold inline-block min-w-[20px] relative">
-                            {currentWord}
-                            <span className="animate-pulse absolute -right-3 top-0 md:top-1 h-full w-[2px] md:w-[3px] bg-[#00ebff]"></span>
+                {/* Code Snippet Box with Neumorphism */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-[#212121] rounded-xl p-6 md:p-8 max-w-2xl mx-auto text-left shadow-[inset_5px_5px_10px_#151515,inset_-5px_-5px_10px_#2d2d2d] relative overflow-hidden group mb-12 border border-gray-800/10"
+                >
+                    {/* Status Bar of Code Window */}
+                    <div className="flex items-center gap-2 mb-6 border-b border-gray-700/30 pb-4">
+                        <div className="flex gap-2 mr-4">
+                            <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_5px_rgba(239,68,68,0.5)]"></div>
+                            <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_5px_rgba(234,179,8,0.5)]"></div>
+                            <div className="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
+                        </div>
+                        <span className="text-xs text-gray-500 font-mono flex items-center gap-2">
+                            <Terminal size={12} />
+                            developer.config.js
                         </span>
-                    </motion.p>
-                </div>
+                    </div>
+
+                    <div className="text-sm md:text-lg font-mono space-y-2 text-gray-400 leading-relaxed">
+                        <p><span className="text-purple-400">const</span> <span className="text-yellow-200">profile</span> = <span className="text-blue-400">{'{'}</span></p>
+                        <div className="pl-6 space-y-1 border-l-2 border-gray-800 ml-2">
+                            <p>name: <span className="text-green-400">'Rishi Biswas'</span>,</p>
+                            <p>role: <span className="text-green-400">'<span className="text-(--accent-color) font-bold">{currentWord}<span className="animate-pulse">|</span></span>'</span>,</p>
+                            <p>status: <span className="text-orange-400">true</span>,</p>
+                            <p>tools: [<span className="text-green-400">'React'</span>, <span className="text-green-400">'Node'</span>, <span className="text-green-400">'Design'</span>]</p>
+                        </div>
+                        <p className="text-blue-400">{'}'}</p>
+                    </div>
+
+                    {/* Subtle Corner Accent */}
+                    <div className="absolute bottom-0 right-0 p-4 opacity-10">
+                        <Code size={64} />
+                    </div>
+                </motion.div>
 
                 {/* Neumorphic CTA Buttons */}
                 <motion.div
@@ -129,23 +151,53 @@ const Home = () => {
                     </button>
                 </motion.div>
 
-                {/* Floating Abstract 3D-like Shapes */}
+                {/* Background Grid Pattern for Technical/Coding Vibe */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] -z-20 pointer-events-none"></div>
+
+                {/* Floating Neumorphic Code Keys/Icons */}
                 <motion.div
                     animate={{
-                        y: [0, -30, 0],
+                        y: [0, -20, 0],
+                        rotate: [0, 5, 0]
+                    }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-[20%] right-[10%] w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-[#212121] shadow-[8px_8px_16px_#151515,-8px_-8px_16px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 hidden md:flex"
+                >
+                    <Code size={32} />
+                </motion.div>
+
+                <motion.div
+                    animate={{
+                        y: [0, 30, 0],
+                        rotate: [0, -5, 0]
+                    }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute bottom-[20%] left-[8%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-[#212121] shadow-[8px_8px_16px_#151515,-8px_-8px_16px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 hidden md:flex"
+                >
+                    <Database size={36} />
+                </motion.div>
+
+                <motion.div
+                    animate={{
+                        y: [0, -25, 0],
                         rotate: [0, 10, 0]
                     }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/3 right-[5%] lg:right-[15%] w-20 h-20 lg:w-32 lg:h-32 rounded-3xl bg-linear-to-br from-[#262626] to-[#1a1a1a] shadow-[15px_15px_30px_#151515,-15px_-15px_30px_#2d2d2d] -z-10 hidden md:block border border-gray-700/10"
-                />
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                    className="absolute top-[25%] left-[12%] w-12 h-12 md:w-16 md:h-16 rounded-xl bg-[#212121] shadow-[6px_6px_12px_#151515,-6px_-6px_12px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 hidden md:flex"
+                >
+                    <Hash size={24} />
+                </motion.div>
+
                 <motion.div
                     animate={{
-                        y: [0, 40, 0],
-                        rotate: [0, -10, 0]
+                        y: [0, 20, 0],
+                        rotate: [0, -8, 0]
                     }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-1/4 left-[5%] lg:left-[15%] w-16 h-16 lg:w-24 lg:h-24 rounded-full bg-linear-to-tl from-[#262626] to-[#1a1a1a] shadow-[15px_15px_30px_#151515,-15px_-15px_30px_#2d2d2d] -z-10 hidden md:block border border-gray-700/10"
-                />
+                    transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    className="absolute bottom-[30%] right-[15%] w-14 h-14 md:w-18 md:h-18 rounded-xl bg-[#212121] shadow-[6px_6px_12px_#151515,-6px_-6px_12px_#2d2d2d] flex items-center justify-center text-gray-500/50 border border-gray-800/10 -z-10 hidden md:flex"
+                >
+                    <Cpu size={28} />
+                </motion.div>
 
             </div>
         </div>

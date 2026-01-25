@@ -44,8 +44,12 @@ const Navbar = () => {
                 <div className="flex items-center gap-2 md:gap-4">
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-(--bg-primary) shadow-[5px_5px_10px_var(--shadow-small-dark),-5px_-5px_10px_var(--shadow-small-light)] flex items-center justify-center p-1 border border-gray-800/10 hover:shadow-[inset_5px_5px_10px_var(--shadow-small-dark),inset_-5px_-5px_10px_var(--shadow-small-light)] transition-all duration-300 cursor-pointer">
                         <img
-                            src="https://ui-avatars.com/api/?name=Rex+Biswas&background=00ebff&color=212121"
+                            src="https://media.licdn.com/dms/image/v2/D5603AQEgxQwX4tWhvw/profile-displayphoto-shrink_800_800/B56ZbxSlyxHUAk-/0/1747804906029?e=1770854400&v=beta&t=MoqHomppPlAOsXYEIgvgzTjpqWW_BVKCFywDVcmIaOM"
                             alt="Profile"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "https://ui-avatars.com/api/?name=Rex+Biswas&background=00ebff&color=212121";
+                            }}
                             className="w-full h-full rounded-full object-cover"
                         />
                     </div>
