@@ -14,10 +14,9 @@ const Projects = () => {
             description: "A modern Sneakerhead web application built with React.js, Three.js, and Framer Motion, featuring immersive 3D sneaker visualizations, smooth animations, and an interactive user experience designed for sneaker enthusiasts.",
             tags: ["React", "FramerMotion", "Threejs", "Tailwind"],
             image: "from-blue-500/20 to-cyan-500/20",
-            imageSrc: "https://sneakerhead-khaki.vercel.app/sneaker_1.png",
+            imageSrc: "https://www.shutterstock.com/image-vector/stylish-vector-icon-sports-shoe-260nw-2657361259.jpg",
             githubUrl: "https://github.com/Rexbiswas/sneakerhead",
-            projectUrl: "https://sneakerhead-khaki.vercel.app/",
-            icon: Globe
+            projectUrl: "https://sneakerhead-khaki.vercel.app/"
         },
         {
             id: 2,
@@ -26,10 +25,9 @@ const Projects = () => {
             description: "This visual concept showcases a futuristic concept car presented through an immersive, interactive web experience. Built using React for a component-driven architecture, Tailwind CSS for a clean and modern UI, and Framer Motion for smooth, cinematic animations, the project focuses on blending technology with design storytelling.",
             tags: ["React", "Tailwind", "FramerMotion", "GSAP", "Threejs"],
             image: "from-purple-500/20 to-pink-500/20",
-            imageSrc: "https://visual-concept.vercel.app/visual_concept.avif",
+            imageSrc: "https://www.shutterstock.com/image-illustration/styled-racing-car-260nw-285209789.jpg",
             githubUrl: "https://github.com/Rexbiswas/visual_concept",
-            projectUrl: "https://visual-concept.vercel.app/",
-            icon: Layers
+            projectUrl: "https://visual-concept.vercel.app/"
         },
         {
             id: 3,
@@ -38,14 +36,26 @@ const Projects = () => {
             description: "A modern and responsive web application built with React that showcases the Rockerz headphone lineup with an intuitive and visually appealing user interface.",
             tags: ["React", "tailwind", "FramerMotion"],
             image: "from-orange-500/20 to-red-500/20",
-            imageSrc: "#",
+            imageSrc: "https://media.istockphoto.com/id/1244097573/vector/headphones-minimal-icon-with-sound-waves.jpg?s=612x612&w=0&k=20&c=OvARZEMYt_CM9M9-oJmMZ3O-HtEB-CAKqpGZPSA1acM=",
             githubUrl: "https://github.com/Rexbiswas/rockerz",
-            projectUrl: "https://rockerz-kappa.vercel.app/",
-            icon: Smartphone
+            projectUrl: "https://rockerz-kappa.vercel.app/"
+        },
+        {
+            id: 4,
+            title: "Coral Cookies",
+            category: "Web App",
+            description: "A modern and responsive web application built with React that showcases the Rockerz headphone lineup with an intuitive and visually appealing user interface.",
+            tags: ["React", "tailwind", "FramerMotion", "Matter.js"],
+            image: "from-orange-500/20 to-red-500/20",
+            imageSrc: "https://static.vecteezy.com/system/resources/previews/006/735/371/non_2x/cookies-icon-for-website-presentation-symbol-free-vector.jpg",
+            githubUrl: "https://github.com/Rexbiswas/rockerz",
+            projectUrl: "https://rockerz-kappa.vercel.app/"
         }
     ];
 
-    const filters = ["All", "Web App", "Productivity", "Web Design"];
+    // "Productivity"
+
+    const filters = ["All", "Web App", "Web Design"];
 
     const filteredProjects = filter === 'All'
         ? projects
