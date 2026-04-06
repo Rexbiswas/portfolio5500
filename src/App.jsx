@@ -1,27 +1,44 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import About from './pages/About'
-import Skills from './pages/Skills'
-import Projects from './pages/Projects'
-import Contact from './pages/Contact'
-import Resume from './pages/Resume'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import { ThemeProvider } from './components/ThemeContext'
+import { WindowManagerProvider, useWindowManager } from './components/WindowManagerContext'
+import DesktopShell from './components/DesktopShell'
+import MobileShell from './components/MobileShell'
+import LockScreen from './components/LockScreen'
 
-import Footer from './components/Footer'
+const AppContent = () => {
+  const { isLocked } = useWindowManager();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-black font-sans selection:bg-accent selection:text-white">
+      <AnimatePresence mode="wait">
+        {isLocked && (
+            <LockScreen key="lock-screen" />
+        )}
+      </AnimatePresence>
+      
+      {isMobile ? <MobileShell /> : <DesktopShell />}
+    </div>
+  );
+};
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/resume" element={<Resume />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <ThemeProvider>
+      <WindowManagerProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </WindowManagerProvider>
+    </ThemeProvider>
   )
 }
 

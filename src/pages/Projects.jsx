@@ -1,188 +1,235 @@
 import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Layers, Smartphone, Globe } from 'lucide-react';
+import { Github, ExternalLink, Globe, Layout, Code as CodeIcon, Folder, FileCode, Search, Grid, List, ChevronRight, MoreHorizontal, Download, Share2, Info, ArrowLeft, ArrowRight, Home } from 'lucide-react';
 
 const Projects = () => {
     const [filter, setFilter] = useState('All');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'list'
 
     const projects = [
         {
             id: 1,
             title: "SneakerHead",
             category: "Web App",
-            description: "A modern Sneakerhead web application built with React.js, Three.js, and Framer Motion, featuring immersive 3D sneaker visualizations, smooth animations, and an interactive user experience designed for sneaker enthusiasts.",
-            tags: ["React", "FramerMotion", "Threejs", "Tailwind"],
-            image: "from-blue-500/20 to-cyan-500/20",
-            imageSrc: "https://www.shutterstock.com/image-vector/stylish-vector-icon-sports-shoe-260nw-2657361259.jpg",
+            description: "A modern Sneakerhead web application with 3D sneaker Visualizations.",
+            tags: ["React", "Three.js", "Tailwind"],
+            imageSrc: "https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=800&auto=format&fit=crop",
             githubUrl: "https://github.com/Rexbiswas/sneakerhead",
-            projectUrl: "https://sneakerhead-khaki.vercel.app/"
+            projectUrl: "https://sneakerhead-khaki.vercel.app/",
+            size: "12.4 MB",
+            date: "24-03-2024"
         },
         {
             id: 2,
             title: "VisualConcept",
             category: "Web Design",
-            description: "This visual concept showcases a futuristic concept car presented through an immersive, interactive web experience. Built using React for a component-driven architecture, Tailwind CSS for a clean and modern UI, and Framer Motion for smooth, cinematic animations, the project focuses on blending technology with design storytelling.",
-            tags: ["React", "Tailwind", "FramerMotion", "GSAP", "Threejs"],
-            image: "from-purple-500/20 to-pink-500/20",
-            imageSrc: "https://www.shutterstock.com/image-illustration/styled-racing-car-260nw-285209789.jpg",
+            description: "Futuristic concept car interaction prototype.",
+            tags: ["React", "GSAP", "Three.js"],
+            imageSrc: "https://images.unsplash.com/photo-1549333349-598dc88ec4ca?q=80&w=800&auto=format&fit=crop",
             githubUrl: "https://github.com/Rexbiswas/visual_concept",
-            projectUrl: "https://visual-concept.vercel.app/"
+            projectUrl: "https://visual-concept.vercel.app/",
+            size: "8.1 MB",
+            date: "15-02-2024"
         },
         {
             id: 3,
             title: "Rockerz",
             category: "Web App",
-            description: "A modern and responsive web application built with React that showcases the Rockerz headphone lineup with an intuitive and visually appealing user interface.",
-            tags: ["React", "tailwind", "FramerMotion"],
-            image: "from-orange-500/20 to-red-500/20",
-            imageSrc: "https://media.istockphoto.com/id/1244097573/vector/headphones-minimal-icon-with-sound-waves.jpg?s=612x612&w=0&k=20&c=OvARZEMYt_CM9M9-oJmMZ3O-HtEB-CAKqpGZPSA1acM=",
+            description: "Premium headphone showcase with cinematic animations.",
+            tags: ["React", "Tailwind", "Framer"],
+            imageSrc: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop",
             githubUrl: "https://github.com/Rexbiswas/rockerz",
-            projectUrl: "https://rockerz-kappa.vercel.app/"
-        },
-        {
-            id: 4,
-            title: "Coral Cookies",
-            category: "Web App",
-            description: "A modern and responsive web application built with React that showcases the Rockerz headphone lineup with an intuitive and visually appealing user interface.",
-            tags: ["React", "tailwind", "FramerMotion", "Matter.js"],
-            image: "from-orange-500/20 to-red-500/20",
-            imageSrc: "https://static.vecteezy.com/system/resources/previews/006/735/371/non_2x/cookies-icon-for-website-presentation-symbol-free-vector.jpg",
-            githubUrl: "https://github.com/Rexbiswas/rockerz",
-            projectUrl: "https://rockerz-kappa.vercel.app/"
+            projectUrl: "https://rockerz-kappa.vercel.app/",
+            size: "15.2 MB",
+            date: "10-01-2024"
         }
     ];
 
-    // "Productivity"
+    const filteredProjects = projects.filter(p => 
+        (filter === 'All' || p.category === filter) &&
+        (p.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
 
-    const filters = ["All", "Web App", "Web Design"];
-
-    const filteredProjects = filter === 'All'
-        ? projects
-        : projects.filter(p => p.category === filter);
+    const ToolbarButton = ({ icon: Icon, label, active = false, onClick }) => (
+        <button 
+            onClick={onClick}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-[4px] transition-all text-[11px] font-bold uppercase tracking-widest ${
+                active ? 'bg-white/10 text-accent border border-white/10' : 'text-white/40 hover:bg-white/5 hover:text-white border border-transparent'
+            }`}
+        >
+            <Icon size={14} />
+            <span className="hidden md:inline">{label}</span>
+        </button>
+    );
 
     return (
-        <div className="min-h-screen bg-[#212121] text-gray-200 p-8 pt-32 pb-20 selection:bg-[#00ebff] selection:text-[#212121]">
-            <Navbar />
+        <div className="h-full flex flex-col bg-transparent animate-in fade-in duration-700 select-none">
+            {/* Header / Toolbar (File Explorer Style) */}
+            <header className="p-3 bg-white/5 backdrop-blur-3xl border-b border-white/5 flex flex-col gap-3">
+                {/* Navigation Bar */}
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
+                            <button className="p-1 px-3 hover:bg-white/10 rounded transition-colors text-white/40 hover:text-white active:scale-90"><ArrowLeft size={16} /></button>
+                            <button className="p-1 px-3 hover:bg-white/10 rounded transition-colors text-white/40 hover:text-white opacity-20"><ArrowRight size={16} /></button>
+                            <button className="p-1 px-3 hover:bg-white/10 rounded transition-colors text-white/40 hover:text-white"><Home size={16} /></button>
+                        </div>
+                        
+                        {/* Breadcrumbs */}
+                        <div className="flex items-center gap-1.5 h-8 px-3 glass-win11-mica border border-white/10 rounded-[4px] text-[10px] font-bold text-white/40 uppercase tracking-widest min-w-[200px] max-w-[400px]">
+                            <span>This PC</span>
+                            <ChevronRight size={10} />
+                            <span className="text-white/60">Projects</span>
+                            {filter !== 'All' && (
+                                <>
+                                    <ChevronRight size={10} />
+                                    <span className="text-accent">{filter}</span>
+                                </>
+                            )}
+                        </div>
+                    </div>
 
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="max-w-7xl mx-auto"
-            >
-                {/* Header */}
-                <div className="text-center mb-16 relative">
-                    <motion.h1
-                        initial={{ y: -50, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.8, type: "spring" }}
-                        className="text-5xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-gray-100 to-gray-500 drop-shadow-[5px_5px_10px_rgba(0,0,0,0.3)]"
-                    >
-                        Featured <span className="text-[#00ebff]">Work</span>
-                    </motion.h1>
-                    <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                        Explore a collection of my digital creations, ranging from complex web applications to intuitive design systems.
-                    </p>
-                </div>
-
-                {/* Filters */}
-                <div className="w-full flex md:justify-center overflow-x-auto md:overflow-visible py-6 md:py-0 mb-10 md:mb-16 px-6 md:px-0 scrollbar-hide">
-                    <div className="flex flex-nowrap md:flex-wrap gap-3 md:gap-4 mx-auto md:mx-0 min-w-min">
-                        {filters.map((f) => (
-                            <button
-                                key={f}
-                                onClick={() => setFilter(f)}
-                                className={`px-5 py-2 md:px-6 md:py-2 text-sm md:text-base rounded-full font-medium transition-all duration-300 border border-gray-800/20 whitespace-nowrap shrink-0
-                                    ${filter === f
-                                        ? 'bg-[#212121] text-[#00ebff] shadow-[inset_5px_5px_10px_#151515,inset_-5px_-5px_10px_#2d2d2d]'
-                                        : 'bg-[#212121] text-gray-500 shadow-[5px_5px_10px_#151515,-5px_-5px_10px_#2d2d2d] hover:text-gray-300 hover:shadow-[7px_7px_14px_#151515,-7px_-7px_14px_#2d2d2d]'
-                                    }`}
-                            >
-                                {f}
-                            </button>
-                        ))}
+                    {/* Search Search */}
+                    <div className="relative w-64 group">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-accent transition-colors" size={14} />
+                        <input 
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search Repositories"
+                            className="w-full h-8 pl-10 pr-4 rounded-[4px] bg-white/5 border border-white/10 focus:bg-white/10 focus:border-accent/40 outline-none text-[10px] uppercase font-black text-white placeholder:text-white/10"
+                        />
                     </div>
                 </div>
 
-                {/* Projects Grid */}
-                <motion.div
-                    layout
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10"
-                >
-                    <AnimatePresence>
+                {/* Main Actions */}
+                <div className="flex items-center justify-between border-t border-white/5 pt-2">
+                    <div className="flex items-center gap-1">
+                        <ToolbarButton 
+                            icon={Grid} 
+                            label="All" 
+                            active={filter === 'All'} 
+                            onClick={() => setFilter('All')} 
+                        />
+                        <ToolbarButton 
+                            icon={Layout} 
+                            label="Web Apps" 
+                            active={filter === 'Web App'} 
+                            onClick={() => setFilter('Web App')} 
+                        />
+                        <ToolbarButton 
+                            icon={Grid} 
+                            label="Design" 
+                            active={filter === 'Web Design'} 
+                            onClick={() => setFilter('Web Design')} 
+                        />
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <div className="h-4 w-px bg-white/10 mx-2" />
+                        <button 
+                            onClick={() => setViewMode('grid')}
+                            className={`p-1.5 rounded hover:bg-white/10 transition-colors ${viewMode === 'grid' ? 'text-accent' : 'text-white/40'}`}
+                        >
+                            <Grid size={16} />
+                        </button>
+                        <button 
+                            onClick={() => setViewMode('list')}
+                            className={`p-1.5 rounded hover:bg-white/10 transition-colors ${viewMode === 'list' ? 'text-accent' : 'text-white/40'}`}
+                        >
+                            <List size={16} />
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            {/* Content Area */}
+            <div className="flex-1 overflow-auto p-4 md:p-8 custom-scrollbar">
+                {viewMode === 'grid' ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <AnimatePresence>
+                            {filteredProjects.map((project) => (
+                                <motion.div
+                                    key={project.id}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    className="group flex flex-col glass-win11-mica rounded-lg border border-white/5 overflow-hidden hover:border-accent/40 transition-all cursor-pointer shadow-xl"
+                                >
+                                    <div className="relative aspect-video overflow-hidden border-b border-white/5">
+                                        <img src={project.imageSrc} className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                                        <div className="absolute bottom-3 left-3 flex items-center gap-2">
+                                            {project.tags.map(t => (
+                                                <span key={t} className="text-[8px] font-black uppercase tracking-tighter bg-accent/20 text-accent px-1.5 py-0.5 rounded backdrop-blur-md border border-accent/20">
+                                                    {t}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="p-4 flex flex-col gap-2">
+                                        <div className="flex items-center gap-2">
+                                            <Folder size={16} className="text-yellow-400" />
+                                            <h3 className="text-xs font-black uppercase tracking-widest text-white/80 group-hover:text-white">{project.title}</h3>
+                                        </div>
+                                        <p className="text-[10px] text-white/30 font-medium leading-tight h-8 line-clamp-2">{project.description}</p>
+                                        <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
+                                            <div className="flex items-center gap-3">
+                                                <a href={project.githubUrl} target="_blank" className="p-1.5 hover:bg-white/10 rounded transition-colors text-white/40 hover:text-white"><Github size={14} /></a>
+                                                <a href={project.projectUrl} target="_blank" className="p-1.5 hover:bg-white/10 rounded transition-colors text-white/40 hover:text-accent"><ExternalLink size={14} /></a>
+                                            </div>
+                                            <span className="text-[9px] font-black uppercase tracking-widest text-white/10">{project.size}</span>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    </div>
+                ) : (
+                    <div className="flex flex-col gap-1">
+                        {/* List Headers */}
+                        <div className="flex items-center px-4 py-2 border-b border-white/5 text-[9px] font-black uppercase tracking-[0.2em] text-white/20">
+                            <div className="flex-[4] flex items-center gap-2"><Folder size={12} /> Name</div>
+                            <div className="flex-[2]">Date Modified</div>
+                            <div className="flex-[2]">Type</div>
+                            <div className="flex-[1] text-right">Size</div>
+                        </div>
                         {filteredProjects.map((project) => (
-                            <motion.div
-                                layout
+                             <motion.div
                                 key={project.id}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3 }}
-                                className="group relative bg-[#212121] rounded-3xl p-6 shadow-[20px_20px_60px_#1c1c1c,-20px_-20px_60px_#262626] hover:shadow-[25px_25px_70px_#1a1a1a,-25px_-25px_70px_#282828] transition-all duration-300 border border-gray-800/10"
-                            >
-                                {/* Image / Preview Area (Inset Shadow) */}
-                                <div className={`h-64 rounded-2xl bg-linear-to-br ${project.imageSrc ? '' : project.image} shadow-[inset_5px_5px_10px_rgba(0,0,0,0.5),inset_-5px_-5px_10px_rgba(255,255,255,0.05)] mb-6 flex items-center justify-center relative overflow-hidden`}>
-
-                                    {project.imageSrc ? (
-                                        <img src={project.imageSrc} alt={project.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-                                    ) : (
-                                        <project.icon size={64} className="text-white/20 group-hover:text-white/40 transition-colors duration-500 transform group-hover:scale-110" />
-                                    )}
-
-                                    {/* Overlay on Hover */}
-                                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6">
-                                        <a
-                                            href={project.githubUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="p-3 rounded-full bg-[#212121] text-[#00ebff] shadow-[5px_5px_10px_black] hover:scale-110 transition-transform"
-                                            title="View Code"
-                                        >
-                                            <Github size={24} />
-                                        </a>
-                                        <a
-                                            href={project.projectUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="p-3 rounded-full bg-[#212121] text-[#00ebff] shadow-[5px_5px_10px_black] hover:scale-110 transition-transform"
-                                            title="Live Demo"
-                                        >
-                                            <ExternalLink size={24} />
-                                        </a>
-                                    </div>
+                                className="flex items-center px-4 py-3 rounded-md hover:bg-white/5 group border border-transparent hover:border-white/5 transition-all cursor-pointer"
+                             >
+                                <div className="flex-[4] flex items-center gap-3">
+                                    <FileCode size={20} className="text-blue-400 opacity-60 group-hover:opacity-100" />
+                                    <span className="text-xs font-bold text-white/70 group-hover:text-accent">{project.title}</span>
                                 </div>
-
-                                {/* Content */}
-                                <div>
-                                    <div className="flex justify-between items-start mb-3">
-                                        <h3 className="text-2xl font-bold text-gray-200 group-hover:text-[#00ebff] transition-colors">
-                                            {project.title}
-                                        </h3>
-                                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#1a1a1a] text-gray-400 border border-gray-800">
-                                            {project.category}
-                                        </span>
-                                    </div>
-                                    <p className="text-gray-400 mb-6 leading-relaxed">
-                                        {project.description}
-                                    </p>
-
-                                    {/* Tech Stack Chips */}
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.tags.map(tag => (
-                                            <span
-                                                key={tag}
-                                                className="px-3 py-1 text-sm font-medium rounded-lg bg-[#212121] text-gray-400 shadow-[3px_3px_6px_#181818,-3px_-3px_6px_#2a2a2a]"
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </motion.div>
+                                <div className="flex-[2] text-[10px] text-white/30 font-mono">{project.date}</div>
+                                <div className="flex-[2] text-[10px] text-white/30 truncate uppercase tracking-tighter">{project.category} Project</div>
+                                <div className="flex-[1] text-[10px] text-white/20 font-mono text-right">{project.size}</div>
+                             </motion.div>
                         ))}
-                    </AnimatePresence>
-                </motion.div>
-            </motion.div>
+                    </div>
+                )}
+            </div>
+
+            {/* Footer / Status Bar */}
+            <footer className="px-6 py-2 bg-white/5 backdrop-blur-3xl border-t border-white/5 flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-white/30">
+                <div className="flex items-center gap-4">
+                    <span>{filteredProjects.length} items</span>
+                    <span className="text-white/10">|</span>
+                    <span>{filteredProjects.length} selected</span>
+                </div>
+                <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-1.5 opacity-60">
+                        <Share2 size={12} /> Share
+                    </div>
+                    <div className="flex items-center gap-1.5 opacity-60">
+                        <Info size={12} /> Properties
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 };

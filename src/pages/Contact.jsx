@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Github, Linkedin, MapPin, Copy, Check, ExternalLink, Cpu } from 'lucide-react';
+import { Mail, Github, Linkedin, MapPin, Copy, Check, ExternalLink, Send, Inbox, Star, Trash2, Archive, Flag, ChevronRight, Search, Plus, Filter, Paperclip, Smile, MoreHorizontal, AtSign } from 'lucide-react';
 
 const Contact = () => {
     const [copied, setCopied] = useState(false);
-
+    const [selectedChannel, setSelectedChannel] = useState('email');
     const email = "rexbiswas1@gmail.com";
 
     const handleCopyEmail = () => {
@@ -14,157 +13,216 @@ const Contact = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const contactMethods = [
+    const channels = [
         {
             id: "email",
-            title: "Email Access",
-            value: email,
+            title: "Direct Transmission",
+            subject: "New Project Inquiry",
+            preview: "Hello Rishi, I would like to discuss a potential collaboration...",
             icon: Mail,
-            action: handleCopyEmail,
-            secondaryIcon: copied ? Check : Copy,
-            color: "text-green-400",
-            delay: 0.2
-        },
-        {
-            id: "github",
-            title: "Code Repository",
-            value: "github.com/Rexbiswas",
-            icon: Github,
-            link: "https://github.com/Rexbiswas",
-            secondaryIcon: ExternalLink,
-            color: "text-purple-400",
-            delay: 0.3
+            color: "text-blue-400",
+            bg: "bg-blue-400/10",
+            time: "10:24 AM",
+            isNew: true
         },
         {
             id: "linkedin",
-            title: "Professional Network",
-            value: "linkedin.com/in/rishi-biswas",
+            title: "LinkedIn Networking",
+            subject: "Professional Connect",
+            preview: "Let's connect on LinkedIn to expand our professional network.",
             icon: Linkedin,
-            link: "https://www.linkedin.com/in/rishi-biswas-0474a6258/",
-            secondaryIcon: ExternalLink,
-            color: "text-blue-400",
-            delay: 0.4
+            color: "text-sky-500",
+            bg: "bg-sky-500/10",
+            time: "Yesterday"
         },
         {
-            id: "location",
-            title: "Base Operations",
-            value: "India",
-            icon: MapPin,
-            color: "text-red-400",
-            delay: 0.5,
-            static: true
+            id: "github",
+            title: "GitHub Repository",
+            subject: "Code Collaboration",
+            preview: "Interested in contributing to your open source projects.",
+            icon: Github,
+            color: "text-purple-400",
+            bg: "bg-purple-400/10",
+            time: "Mon"
         }
     ];
 
+    const SidebarButton = ({ icon: Icon, label, count = 0, active = false }) => (
+        <button className={`flex items-center justify-between w-full p-2 px-3 rounded-lg text-[11px] font-bold uppercase tracking-widest transition-all ${
+            active ? 'bg-white/10 text-accent border border-white/5 shadow-inner' : 'text-white/40 hover:bg-white/5 hover:text-white'
+        }`}>
+            <div className="flex items-center gap-3">
+                <Icon size={14} className={active ? 'text-accent' : 'opacity-40'} />
+                <span>{label}</span>
+            </div>
+            {count > 0 && <span className="bg-accent/20 text-accent px-1.5 py-0.5 rounded-full text-[8px] font-black">{count}</span>}
+        </button>
+    );
+
     return (
-        <div className="min-h-screen bg-[#212121] text-gray-200 selection:bg-[#00ebff] selection:text-[#212121] overflow-hidden relative">
-            <Navbar />
+        <div className="h-full flex flex-col md:flex-row bg-transparent animate-in fade-in duration-700 select-none overflow-hidden">
+            {/* Left Sidebar (Mail Folders) */}
+            <aside className="w-full md:w-56 bg-white/5 backdrop-blur-3xl border-r border-white/5 flex flex-col p-4 gap-6 pt-6">
+                <button className="flex items-center gap-3 p-3 bg-accent text-white rounded-lg shadow-xl hover:brightness-110 active:scale-95 transition-all group">
+                    <Plus size={18} className="group-hover:rotate-90 transition-transform" />
+                    <span className="text-[11px] font-black uppercase tracking-widest">New Message</span>
+                </button>
 
-            {/* Background Grid Pattern (Consistent with Home) */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none"></div>
-
-            <div className="max-w-7xl mx-auto px-4 pt-32 pb-20 relative z-10 min-h-screen flex flex-col items-center justify-center">
-
-                {/* Header Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: -50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
-                >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1a1a1a] border border-gray-800 text-[#00ebff] text-sm font-mono mb-6 shadow-[inset_2px_2px_4px_#101010,inset_-2px_-2px_4px_#262626]">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ebff] opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00ebff]"></span>
-                        </span>
-                        System Online
-                    </div>
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-linear-to-r from-gray-100 to-gray-500 drop-shadow-md">
-                        Establish <span className="text-[#00ebff]">Connection</span>
-                    </h1>
-                    <p className="text-gray-400 max-w-xl mx-auto text-lg">
-                        Select a secure channel to initiate communication protocol.
-                    </p>
-                </motion.div>
-
-                {/* Contact Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-                    {contactMethods.map((method) => (
-                        <motion.div
-                            key={method.id}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: method.delay, type: "spring" }}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="group relative"
-                        >
-                            <div
-                                onClick={() => {
-                                    if (method.action) method.action();
-                                    if (method.link) window.open(method.link, '_blank');
-                                }}
-                                className={`
-                                    relative p-8 rounded-3xl bg-[#212121] 
-                                    shadow-[15px_15px_30px_#1a1a1a,-15px_-15px_30px_#282828] 
-                                    hover:shadow-[inset_5px_5px_10px_#1a1a1a,inset_-5px_-5px_10px_#282828] 
-                                    transition-all duration-300 border border-gray-800/10 cursor-pointer overflow-hidden
-                                    ${method.id === 'email' && copied ? 'border-[#00ebff]/50' : ''}
-                                `}
-                            >
-                                {/* Decorative Circuit Lines */}
-                                <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                                    <Cpu size={100} />
-                                </div>
-
-                                <div className="flex items-start justify-between relative z-10">
-                                    <div className={`p-4 rounded-2xl bg-[#212121] shadow-[5px_5px_10px_#181818,-5px_-5px_10px_#2a2a2a] ${method.color} mb-6`}>
-                                        <method.icon size={32} />
-                                    </div>
-
-                                    {!method.static && (
-                                        <div className={`text-gray-500 group-hover:text-[#00ebff] transition-colors duration-300`}>
-                                            <method.secondaryIcon size={20} />
-                                        </div>
-                                    )}
-                                </div>
-
-                                <div className="relative z-10">
-                                    <h3 className="text-gray-500 text-sm font-mono tracking-wider mb-2 uppercase">{method.title}</h3>
-                                    <p className={`text-xl md:text-2xl font-bold text-gray-200 group-hover:text-[#00ebff] transition-colors break-all ${method.id === 'email' && copied ? 'text-[#00ebff]' : ''}`}>
-                                        {method.id === 'email' && copied ? 'Copied to Clipboard!' : method.value}
-                                    </p>
-                                </div>
-
-                                {/* Glow Effect on Hover */}
-                                <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#00ebff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-1000 pointer-events-none transform -skew-x-12 -translate-x-full group-hover:translate-x-full" />
-                            </div>
-                        </motion.div>
-                    ))}
+                <div className="flex flex-col gap-1">
+                    <SidebarButton icon={Inbox} label="Inbox" count={3} active={true} />
+                    <SidebarButton icon={Star} label="Starred" />
+                    <SidebarButton icon={Archive} label="Archive" />
+                    <SidebarButton icon={Send} label="Sent" />
+                    <SidebarButton icon={Trash2} label="Deleted" />
                 </div>
 
-                {/* Bottom Terminal Decoration */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1 }}
-                    className="mt-20 w-full max-w-2xl hidden md:block"
-                >
-                    <div className="bg-[#1a1a1a] rounded-lg p-4 font-mono text-xs text-gray-500 shadow-[inset_2px_2px_5px_black]">
-                        <div className="flex gap-2 mb-2">
-                            <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                            <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                            <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                <div className="mt-auto pt-6 border-t border-white/5 flex flex-col gap-4">
+                    <div className="flex items-center gap-3 px-3 text-white/30">
+                         <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent overflow-hidden border border-white/10">
+                            <img src="https://media.licdn.com/dms/image/v2/D5603AQEgxQwX4tWhvw/profile-displayphoto-shrink_400_400/B56ZbxSlyxHUAo-/0/1747804906002?e=1776902400&v=beta&t=haMQkDgDqKgyYz0Sw7n2My3VyGo5V5WquDXHhzqRF_8" className="w-full h-full object-cover" />
                         </div>
-                        <p className="typing-effect">
-                            <span className="text-green-500">user@portfolio:~$</span> initiating_contact_sequence.sh<br />
-                            <span className="text-blue-500">System:</span> Channels open. Waiting for input...<br />
-                            <span className="animate-pulse">_</span>
-                        </p>
+                         <div className="flex flex-col overflow-hidden">
+                            <span className="text-[10px] font-black text-white truncate">Rishi Biswas</span>
+                            <span className="text-[8px] font-bold text-white/20 truncate">rexbiswas1@gmail.com</span>
+                         </div>
                     </div>
-                </motion.div>
+                </div>
+            </aside>
 
-            </div>
+            {/* Message List (Inboxes) */}
+            <main className="w-full md:w-80 border-r border-white/5 flex flex-col bg-white/3">
+                <div className="p-4 flex flex-col gap-4 border-b border-white/5">
+                    <div className="relative group">
+                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-accent transition-colors" size={12} />
+                         <input 
+                            type="text" 
+                            placeholder="Search Mailbox"
+                            className="w-full h-8 pl-9 pr-4 rounded-[4px] bg-white/5 border border-white/10 focus:bg-white/10 focus:border-accent/40 outline-none text-[10px] uppercase font-black text-white placeholder:text-white/10"
+                        />
+                    </div>
+                    <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-white/30 px-1">
+                        <span>Sort: Newest First</span>
+                        <Filter size={12} className="cursor-pointer hover:text-white transition-colors" />
+                    </div>
+                </div>
+
+                <div className="flex-1 overflow-y-auto custom-scrollbar">
+                    {channels.map((channel) => (
+                        <div 
+                            key={channel.id}
+                            onClick={() => setSelectedChannel(channel.id)}
+                            className={`p-4 border-b border-white/5 cursor-pointer transition-all relative group ${
+                                selectedChannel === channel.id ? 'bg-accent/5 ring-inset ring-1 ring-accent/20' : 'hover:bg-white/5'
+                            }`}
+                        >
+                            {channel.isNew && <div className="absolute left-1 top-1/2 -translate-y-1/2 w-1 h-8 bg-accent rounded-full" />}
+                            <div className="flex justify-between items-start mb-1">
+                                <div className="flex items-center gap-2">
+                                     <div className={`w-6 h-6 rounded-md ${channel.bg} flex items-center justify-center ${channel.color}`}>
+                                        <channel.icon size={14} />
+                                     </div>
+                                     <span className={`text-[11px] font-black uppercase tracking-tight ${channel.isNew ? 'text-white' : 'text-white/60'}`}>{channel.title}</span>
+                                </div>
+                                <span className="text-[9px] text-white/20 font-bold">{channel.time}</span>
+                            </div>
+                            <h4 className={`text-[11px] font-bold truncate mb-1 pr-6 ${channel.isNew ? 'text-accent' : 'text-white/40'}`}>{channel.subject}</h4>
+                            <p className="text-[10px] text-white/20 line-clamp-2 leading-tight">{channel.preview}</p>
+                        </div>
+                    ))}
+                </div>
+            </main>
+
+            {/* Message Detail View (Communication Form) */}
+            <section className="flex-1 flex flex-col bg-transparent relative overflow-hidden">
+                <header className="p-4 md:p-8 border-b border-white/5 flex flex-col gap-6">
+                    <div className="flex items-center justify-between">
+                         <div className="flex items-center gap-4">
+                             <div className="w-12 h-12 rounded-full glass-win11-mica border border-white/10 flex items-center justify-center text-accent shadow-xl overflow-hidden">
+                                {selectedChannel === 'email' && <Mail size={24} />}
+                                {selectedChannel === 'linkedin' && <Linkedin size={24} className="text-sky-500" />}
+                                {selectedChannel === 'github' && <Github size={24} className="text-purple-400" />}
+                             </div>
+                             <div className="flex flex-col">
+                                <h2 className="text-xl font-black tracking-tighter uppercase">{channels.find(c => c.id === selectedChannel).title}</h2>
+                                <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em]">{channels.find(c => c.id === selectedChannel).subject}</span>
+                             </div>
+                         </div>
+                         <div className="flex items-center gap-2">
+                             <button className="p-2 hover:bg-white/10 rounded transition-colors text-white/40"><Archive size={16} /></button>
+                             <button className="p-2 hover:bg-white/10 rounded transition-colors text-white/40"><Flag size={16} /></button>
+                             <button className="p-2 hover:bg-white/10 rounded transition-colors text-white/40"><Trash2 size={16} /></button>
+                             <div className="w-px h-4 bg-white/10 mx-2" />
+                             <button className="p-2 hover:bg-white/10 rounded transition-colors text-white/40"><MoreHorizontal size={16} /></button>
+                         </div>
+                    </div>
+                </header>
+
+                <div className="flex-1 p-4 md:p-10 flex flex-col gap-8 overflow-y-auto custom-scrollbar">
+                    {/* Simulated Message Entry */}
+                    <div className="glass-win11-mica border border-white/10 rounded-2xl p-8 shadow-2xl relative group overflow-hidden max-w-2xl">
+                        <div className="absolute top-0 right-0 p-4 opacity-5 rotate-12 scale-150 text-accent group-hover:scale-125 transition-transform">
+                            <AtSign size={100} />
+                        </div>
+                        <h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6">Action Required</h5>
+                        <p className="text-lg font-bold text-white/90 leading-relaxed italic mb-8">
+                            "Connecting with world-class engineers is just one signal away. Choose your frequency and let's build the future."
+                        </p>
+                        
+                        <div className="flex flex-col gap-4">
+                            <div className="flex items-center justify-between p-4 bg-white/3 rounded-xl border border-white/5 hover:border-white/15 transition-all">
+                                <div className="flex items-center gap-4">
+                                     <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent"><Mail size={20} /></div>
+                                     <div className="flex flex-col">
+                                        <span className="text-[9px] font-black uppercase tracking-widest text-white/20">Official Mail</span>
+                                        <span className="text-xs font-bold text-white/80">{email}</span>
+                                     </div>
+                                </div>
+                                <button 
+                                    onClick={handleCopyEmail}
+                                    className="p-2 px-4 glass border border-white/10 rounded-md text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition-all active:scale-95"
+                                >
+                                    {copied ? <Check size={14} className="text-emerald-400" /> : 'Copy'}
+                                </button>
+                            </div>
+
+                            <a 
+                                href="https://www.linkedin.com/in/rishi-biswas-0474a6258/" 
+                                target="_blank"
+                                className="flex items-center justify-between p-4 bg-white/3 rounded-xl border border-white/5 hover:border-white/15 transition-all group"
+                            >
+                                <div className="flex items-center gap-4">
+                                     <div className="w-10 h-10 rounded-full bg-sky-500/10 flex items-center justify-center text-sky-500"><Linkedin size={20} /></div>
+                                     <div className="flex flex-col">
+                                        <span className="text-[9px] font-black uppercase tracking-widest text-white/20">Professional Channel</span>
+                                        <span className="text-xs font-bold text-white/80">rishi-biswas</span>
+                                     </div>
+                                </div>
+                                <ExternalLink size={14} className="text-white/20 group-hover:text-sky-500 transition-colors" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Quick Reply Form (Bottom Bar Style) */}
+                <div className="p-4 md:p-6 bg-white/3 backdrop-blur-3xl border-t border-white/5 flex flex-col gap-4">
+                    <div className="flex items-center gap-4 text-white/20 px-2">
+                        <Paperclip size={16} className="cursor-pointer hover:text-white transition-colors" />
+                        <Smile size={16} className="cursor-pointer hover:text-white transition-colors" />
+                        <div className="h-4 w-px bg-white/10 mx-1" />
+                        <span className="text-[10px] font-black uppercase tracking-widest">Awaiting Message Input...</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                         <input 
+                            type="text" 
+                            placeholder="Type your message to Rishi..." 
+                            className="flex-1 h-12 glass-win11-mica border border-white/10 rounded-xl px-6 text-sm font-medium outline-none focus:border-accent/40 transition-all placeholder:text-white/10"
+                        />
+                        <button className="h-12 w-12 flex items-center justify-center bg-accent text-white rounded-xl shadow-xl shadow-accent/20 hover:brightness-110 active:scale-95 transition-all">
+                            <Send size={20} />
+                        </button>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };
