@@ -1,96 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import TerminalHero from '../components/TerminalHero';
-import { MousePointer2, Zap, Layout, Server, Database } from 'lucide-react';
+import { MousePointer2 } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const Home = () => {
     return (
-        <div className="relative min-h-screen">
-            {/* Hero Section */}
-            <TerminalHero />
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="relative min-h-screen pt-32 pb-24 px-6 bg-white"
+        >
+            <Navbar />
+            
+            <div className="max-w-7xl mx-auto">
 
-            {/* Highlights Section */}
-            <section className="py-24 px-6 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <motion.div 
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-16"
-                    >
-                        <h2 className="text-3xl md:text-5xl font-bold mb-4">Core <span className="text-accent">Expertise</span></h2>
-                        <p className="text-text-secondary max-w-xl mx-auto">Specialized in building high-performance, visually stunning digital experiences.</p>
-                    </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {features.map((feature, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                whileHover={{ y: -10 }}
-                                className="glass-card p-8 rounded-2xl group transition-all hover:border-accent/30"
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
-                                    <feature.icon size={24} />
-                                </div>
-                                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-text-secondary text-sm leading-relaxed">{feature.desc}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
-            {/* Bottom Section - Preview of projects maybe? */}
-            <section className="py-24 px-6 bg-white/[0.02]">
-                <div className="max-w-4xl mx-auto text-center">
-                    <motion.div
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        className="glass p-12 rounded-3xl border-white/5"
-                    >
-                        <Zap className="mx-auto text-accent mb-6" size={48} />
-                        <h2 className="text-4xl font-bold mb-6">Let's build something <span className="text-accent underline decoration-accent/30 underline-offset-8">Extraordinary</span></h2>
-                        <p className="text-lg text-text-secondary mb-10 italic">"Design is not just what it looks like and feels like. Design is how it works."</p>
-                        <motion.button 
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-white text-black px-10 py-4 rounded-full font-bold text-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all"
-                        >
-                            Get In Touch
-                        </motion.button>
-                    </motion.div>
-                </div>
-            </section>
-        </div>
+            </div>
+        </motion.div>
     );
 };
 
-const features = [
-    {
-        icon: Layout,
-        title: "Frontend",
-        desc: "Crafting pixel-perfect, responsive interfaces using React and modern CSS."
-    },
-    {
-        icon: Server,
-        title: "Backend",
-        desc: "Scalable server-side logic and robust API development with Node.js."
-    },
-    {
-        icon: Database,
-        title: "Database",
-        desc: "Expertise in SQL and NoSQL databases for efficient data management."
-    },
-    {
-        icon: MousePointer2,
-        title: "UI/UX",
-        desc: "Focusing on user-centric design with intuitive flow and high aesthetics."
-    }
-];
+const ProjectPreview = ({ title, type, color }) => (
+    <motion.div 
+        whileHover={{ scale: 0.98 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={`aspect-video rounded-3xl ${color} border border-black/5 p-12 flex flex-col justify-end group cursor-pointer relative overflow-hidden`}
+    >
+        <div className="absolute top-0 right-0 p-8 text-black">
+            <MousePointer2 className="opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0 transition-transform" />
+        </div>
+        <div className="flex flex-col gap-2 relative z-10">
+            <span className="text-[10px] font-black uppercase tracking-widest text-black/30">{type}</span>
+            <h3 className="text-2xl font-black text-black group-hover:text-[#66ad69] transition-colors">{title}</h3>
+        </div>
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+    </motion.div>
+);
 
 export default Home;
-
